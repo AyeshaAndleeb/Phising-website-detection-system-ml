@@ -1,72 +1,97 @@
-# 🛡️ Phishing Website Detection System
+# Phishing Website Detection System
 
-A machine learning web app that detects whether a URL is a **phishing** website or a **safe** website — instantly.
+A machine learning web app that detects whether a URL is a phishing website or a safe website, instantly.
 
-🔗 **Live App:** [Click here to try it](https://phising-website-detection-system-dl.streamlit.app/)
+**Live App:** [Click here to try it](https://phising-website-detection-system-dl.streamlit.app/)
 
----
-
-## 📸 Screenshot
+## Screenshot
 
 ![App Screenshot](images/app-full-screenshot.png)
 
----
+## Table of Contents
 
-## 📊 Dataset
+- [Overview](#overview)
+- [Dataset](#dataset)
+- [How It Works](#how-it-works)
+- [Model Performance](#model-performance)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Author](#author)
 
-- **Total URLs:** 549,346
-- **Good (Safe) URLs:** 392,924 (71.5%)
-- **Bad (Phishing) URLs:** 156,422 (28.5%)
-- **Missing Values:** None — dataset is clean and complete
+## Overview
 
-The dataset contains real-world URLs labeled as `good` or `bad`, making it a strong foundation for training a phishing detection model.
+Phishing attacks are one of the most common cybersecurity threats today. This project trains a machine learning model on 549,346 real-world URLs to detect malicious websites with high accuracy. Users simply paste a URL into the web app and get an instant prediction.
 
----
+## Dataset
 
-## ⚙️ How It Works
+| Property | Details |
+|---|---|
+| Total URLs | 549,346 |
+| Safe (Good) URLs | 392,924 (71.5%) |
+| Phishing (Bad) URLs | 156,422 (28.5%) |
+| Missing Values | None |
+
+The dataset contains real-world URLs labeled as `good` or `bad`.
+
+**Dataset Source:** [Phishing Site URLs on Kaggle](https://www.kaggle.com/datasets/taruntiwarihp/phishing-site-urls)
+
+## How It Works
 
 ### 1. Text Preprocessing
+
 Each URL goes through two steps before training:
-- **Tokenization** — URL is broken into individual words (e.g. `login`, `paypal`, `verify`, `secure`)
-- **Stemming** — Words are reduced to their root form (e.g. `verification` → `verif`, `images` → `imag`) using SnowballStemmer
+
+- **Tokenization** - the URL is broken into individual words (e.g. `login`, `paypal`, `verify`, `secure`)
+- **Stemming** - words are reduced to their root form using SnowballStemmer (e.g. `verification` becomes `verif`, `images` becomes `imag`)
 
 This helps the model focus on the core words that indicate phishing behavior.
 
 ### 2. Feature Extraction
-A **CountVectorizer** converts each URL's text into a numeric vector — counting how often each word appears. This is the input the ML model learns from.
+
+A CountVectorizer converts each URL into a numeric vector by counting how often each word appears. This is the input the model learns from during training.
 
 ### 3. Model Training
+
 Two models were trained and compared:
 
-| Model | Test Accuracy | Train Accuracy |
-|-------|:---:|:---:|
-| Logistic Regression | **96.5%** | 97.9% |
-| Multinomial Naive Bayes | 95.8% | — |
+| Model | Train Accuracy | Test Accuracy |
+|---|:---:|:---:|
+| Logistic Regression | 97.9% | 96.5% |
+| Multinomial Naive Bayes | - | 95.8% |
 
-**Logistic Regression** was chosen as the final model due to higher accuracy.
+Logistic Regression was selected as the final model due to its higher test accuracy.
 
-### 4. Classification Report (Logistic Regression)
+## Model Performance
 
-| | Precision | Recall | F1-Score |
-|--|:---:|:---:|:---:|
-| **Bad (Phishing)** | 91% | 97% | 94% |
-| **Good (Safe)** | 99% | 96% | 98% |
-| **Overall Accuracy** | | | **97%** |
+### Classification Report (Logistic Regression)
 
-> The model is very good at catching phishing sites (97% recall for bad URLs) while keeping false alarms low for safe sites (99% precision for good URLs).
+| Class | Precision | Recall | F1-Score |
+|---|:---:|:---:|:---:|
+| Bad (Phishing) | 91% | 97% | 94% |
+| Good (Safe) | 99% | 96% | 98% |
+| Overall Accuracy | | | 97% |
 
----
+The model catches 97% of phishing URLs while keeping false alarms very low for safe sites (99% precision).
 
-## 🧠 Tech Stack
+## Tech Stack
 
-- **Python** — Streamlit, Scikit-learn, NLTK
-- **Vectorizer** — CountVectorizer
-- **Model** — Logistic Regression
-- **Dataset** — 549,346 labeled URLs
+| | |
+|---|---|
+| Language | Python 3 |
+| Web Framework | Streamlit |
+| Machine Learning | Scikit-learn |
+| NLP | NLTK (SnowballStemmer) |
+| Feature Extraction | CountVectorizer |
+| Model | Logistic Regression |
+| Dataset | 549,346 labeled URLs |
 
----
+## Getting Started
 
-## ⚙️ Run Locally
+### Prerequisites
+
+Make sure you have Python 3.8+ installed.
+
+### Installation
 
 ```bash
 git clone https://github.com/AyeshaAndleeb/Phising-website-detection-system-ml.git
@@ -75,7 +100,10 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
----
+The app will open in your browser at `http://localhost:8501`.
 
-👩‍💻 **Author:** [Ayesha Andleeb](https://github.com/AyeshaAndleeb)  
-⭐ Star this repo if you found it helpful!
+## Author
+
+**Ayesha Andleeb** - [GitHub](https://github.com/AyeshaAndleeb)
+
+If you found this project helpful, consider leaving a star on the repo!

@@ -2,6 +2,10 @@
 
 A machine learning web app that detects whether a URL is a **phishing** website or a **safe** website — instantly.
 
+## 🚀 Live Demo
+
+**[👉 Click here to try the app](https://phising-website-detection-system-dl.streamlit.app/)**
+
 ---
 
 ## 📸 Screenshot

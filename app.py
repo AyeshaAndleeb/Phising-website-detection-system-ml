@@ -29,19 +29,9 @@ if st.button("Check URL", type="primary", use_container_width=True):
         cleaned_url = re.sub(r'^https?://(www\.)?', '', url)
         predict = model.predict(vector.transform([cleaned_url]))[0]
 
-        st.divider()
         if predict == "bad":
             st.error("⚠️ This is a Phishing Website! Do not enter any personal information.")
         elif predict == "good":
             st.success("✅ This is a Safe and Healthy Website.")
         else:
             st.warning("Something went wrong. Please try again.")
-
-st.divider()
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.markdown("### 🔗 Step 1\nEnter the website URL you want to check.")
-with col2:
-    st.markdown("### 🤖 Step 2\nML model analyzes the URL pattern.")
-with col3:
-    st.markdown("### ✅ Step 3\nGet instant safe or phishing result.")

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Phishing Website Detection</title>
+  </head>
+  <body class="bg-gray-50">
+
+    <!-- header - start -->
+    <div class="bg-white shadow-sm">
+      <div class="mx-auto max-w-screen-xl px-4 md:px-8">
+        <header class="flex items-center justify-between py-4 md:py-6">
+          <a href="/" class="inline-flex items-center gap-2 text-2xl font-bold text-indigo-600 md:text-3xl" aria-label="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            Phishing Detector
+          </a>
+
+          <nav class="hidden gap-8 lg:flex">
+            <a href="/" class="text-base font-semibold text-indigo-500">Home</a>
+            <a href="#about" class="text-base font-semibold text-gray-600 transition duration-100 hover:text-indigo-500">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <!-- header - end -->
+
+    <!-- hero - start -->
+    <div class="bg-white py-10 sm:py-14 lg:py-20">
+      <div class="mx-auto max-w-screen-md px-4 md:px-8">
+        <div class="mb-10 text-center">
+          <h1 class="mb-4 text-3xl font-bold text-gray-800 md:text-4xl lg:text-5xl">Phishing Website Detection</h1>
+          <p class="text-gray-500 md:text-lg">Enter any website URL below to check whether it is a phishing (malicious) site or a safe website using our machine learning model.</p>
+        </div>
+
+        <!-- result - start -->
+        {% if predict %}
+        <div class="mb-8 rounded-lg p-4 text-center text-base font-semibold md:text-lg
+          {% if 'Phishing' in predict %}
+            bg-red-100 text-red-700 border border-red-300
+          {% else %}
+            bg-green-100 text-green-700 border border-green-300
+          {% endif %}">
+          {{ predict }}
+        </div>
+        {% endif %}
+        <!-- result - end -->
+
+        <!-- form - start -->
+        <form class="flex flex-col gap-4 sm:flex-row" method="POST" action="/">
+          <input
+            name="url"
+            id="url"
+            type="text"
+            placeholder="e.g. https://example.com"
+            class="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring focus:border-indigo-400"
+            required
+          />
+          <button
+            type="submit"
+            class="rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base whitespace-nowrap"
+          >
+            Check URL
+          </button>
+        </form>
+        <!-- form - end -->
+      </div>
+    </div>
+    <!-- hero - end -->
+
+    <!-- about - start -->
+    <div id="about" class="bg-gray-50 py-10 sm:py-14 lg:py-20">
+      <div class="mx-auto max-w-screen-xl px-4 md:px-8">
+        <h2 class="mb-8 text-center text-2xl font-bold text-gray-800 lg:text-3xl">How It Works</h2>
+        <div class="grid gap-6 sm:grid-cols-3">
+          <div class="rounded-lg bg-white p-6 shadow-sm text-center">
+            <div class="mb-3 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+            </div>
+            <h3 class="mb-2 font-bold text-gray-800">Enter URL</h3>
+            <p class="text-sm text-gray-500">Paste the website URL you want to check into the input field above.</p>
+          </div>
+
+          <div class="rounded-lg bg-white p-6 shadow-sm text-center">
+            <div class="mb-3 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 font-bold text-gray-800">ML Analysis</h3>
+            <p class="text-sm text-gray-500">Our machine learning model analyzes the URL pattern to detect phishing indicators.</p>
+          </div>
+
+          <div class="rounded-lg bg-white p-6 shadow-sm text-center">
+            <div class="mb-3 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 font-bold text-gray-800">Get Result</h3>
+            <p class="text-sm text-gray-500">Instantly see whether the website is safe or a phishing threat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- about - end -->
+
+    <!-- footer - start -->
+    <footer class="bg-indigo-600 py-6">
+      <div class="mx-auto max-w-screen-xl px-4 md:px-8 text-center">
+        <p class="text-indigo-200 text-sm">© 2024 Phishing Website Detection System. All rights reserved.</p>
+      </div>
+    </footer>
+    <!-- footer - end -->
+
+  </body>
+</html>
